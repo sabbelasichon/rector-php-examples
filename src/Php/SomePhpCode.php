@@ -7,7 +7,7 @@ use Nca\Rector\Dummy\Dummy;
 use Traversable;
 use UnexpectedValueException;
 
-final class SomePhpCode
+class SomePhpCode
 {
     const SOME = 'foo';
 
