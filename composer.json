@@ -2,13 +2,10 @@
     "name": "schreibersebastian/p2media-rector",
     "description": "Show capabilities of rector",
     "type": "project",
-    "require-dev": {
-        "rector/rector": "^0.11.52"
-    },
     "license": "properitary",
     "autoload": {
         "psr-4": {
-            "Schreibersebastian\\P2mediaRector\\": "src/"
+            "Nca\\Rector\\": "src/"
         }
     },
     "authors": [
