@@ -15,5 +15,8 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {}
+    "require": {
+        "doctrine/annotations": "^1.13",
+        "doctrine/orm": "^2.9"
+    }
 }
