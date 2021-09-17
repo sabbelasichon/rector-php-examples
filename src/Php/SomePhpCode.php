@@ -2,7 +2,6 @@
 
 namespace Nca\Rector\Php;
 
-
 use Nca\Rector\Dummy\Dummy;
 use Traversable;
 use UnexpectedValueException;

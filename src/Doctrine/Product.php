@@ -1,6 +1,4 @@
 <?php
-declare(strict_types=1);
-
 
 namespace Nca\Rector\Doctrine;
 
@@ -9,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  */
-final class Product
+class Product
 {
     /**
      * @var int|null
