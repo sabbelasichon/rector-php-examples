@@ -58,7 +58,7 @@ class SomePhpCode
     }
 
     /**
-     * @param null $value
+     * @param mixed|null $value
      *
      * @return int|mixed
      */
