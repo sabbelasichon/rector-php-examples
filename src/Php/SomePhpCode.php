@@ -2,59 +2,38 @@
 
 namespace Nca\Rector\Php;
 
+use JsonException;
 use Nca\Rector\Dummy\Dummy;
 use Traversable;
 use UnexpectedValueException;
 
-class SomePhpCode
+class SomePhpCode implements \Stringable
 {
-    const SOME = 'foo';
+    public const SOME = 'foo';
 
-    /**
-     * @var Dummy
-     */
-    private $dummy;
+    private string $property = 'bar';
 
-    /**
-     * @var string
-     */
-    private $property = 'bar';
-
-    public function __construct(Dummy $dummy)
+    public function __construct(private Dummy $dummy)
     {
-        $this->dummy = $dummy;
         $this->bootstrap();
     }
 
     public function bootstrap()
     {
-        define(CONSTANT_2, 'value');
+        define('CONSTANT_2', 'value');
     }
 
     /**
-     * @param mixed $data
-     *
-     * @return string
+     * @throws JsonException
      */
-    public function jsonEncode($data)
+    public function jsonEncode(mixed $data): string
     {
-        $json = json_encode($data);
-
-        if($json === false) {
-            throw new UnexpectedValueException('Could not encode value to json');
-        }
-
-        return $json;
+        return json_encode($data, 512, JSON_THROW_ON_ERROR);
     }
 
-    /**
-     * @param string $path
-     *
-     * @return string
-     */
-    public function getDirectoryTwoLevelUp($path)
+    public function getDirectoryTwoLevelUp(string $path) : string
     {
-        return dirname(dirname($path));
+        return dirname($path,2);
     }
 
     /**
@@ -64,7 +43,7 @@ class SomePhpCode
      */
     public function getValueOrDefaultIfNull($value = null)
     {
-        return $value === null ? 10 : $value;
+        return  $value ?? 10;
     }
 
     /**
@@ -74,7 +53,7 @@ class SomePhpCode
      */
     public function isIterable($value)
     {
-        return is_array($value) || $value instanceof Traversable;
+        return is_iterable($value);
     }
 
     /**
@@ -82,9 +61,7 @@ class SomePhpCode
      */
     public function filterNumbersGreaterTen(array $numbers)
     {
-        return array_filter($numbers, function ($number) {
-            return $number > 10;
-        });
+        return array_filter($numbers, fn($number) => $number > 10 );
     }
 
     /**
@@ -93,11 +70,7 @@ class SomePhpCode
     public function mySort(array $values)
     {
         usort($values, function ($a, $b) {
-            if ($a[0] === $b[0]) {
-                return 0;
-            }
-
-            return ($a[0] < $b[0]) ? 1 : -1;
+            return $a <=> $b;
         });
 
         return $values;
@@ -110,13 +83,13 @@ class SomePhpCode
      */
     public static function stringContainsCharacterA($haystack)
     {
-        return strpos($haystack, 'a') !== false;
+        return str_contains($haystack, 'a');
     }
 
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->property .' '. self::SOME;
     }
