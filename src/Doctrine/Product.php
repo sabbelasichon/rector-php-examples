@@ -2,32 +2,31 @@
 
 namespace Nca\Rector\Doctrine;
 
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\Id;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- */
+#[Entity]
 class Product
 {
     /**
      * @var int|null
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue
      */
+    #[Id]
+    #[Column(type: 'integer')]
+    #[GeneratedValue]
     private $id;
-
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=false)
      */
+    #[Column(type: 'string', nullable: false)]
     private $title;
-
     public function getId()
     {
         return $this->id;
     }
-
     /**
      * @return void
      */
@@ -35,7 +34,6 @@ class Product
     {
         $this->title = $title;
     }
-
     /**
      * @return string
      */
